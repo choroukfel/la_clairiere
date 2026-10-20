@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#24452f">
+    <title>La Clairière — diorama de papier</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;700;800&display=swap">
+    <link rel="stylesheet" href="style.css">
+    <script src="libraries/p5.min.js"></script>
+    <script src="libraries/p5.sound.min.js"></script>
+    <script src="vehicle.js"></script>
+    <script src="population.js"></script>
+    <script src="paperArt.js"></script>
+    <script src="worldBackdrop.js"></script>
+    <script src="propArt.js"></script>
+    <script src="creatureArt.js"></script>
+    <script src="obstacle.js"></script>les 
+    <script src="sanctuary.js"></script>
+    <script src="steeringBehaviors.js"></script>
+    <script src="evolution.js"></script>
+    <script src="geneticRocket.js"></script>
+    <script src="migratingWisp.js"></script>
+    <script src="wispNest.js"></script>
+    <script src="sensorRay.js"></script>
+    <script src="neuralSteeringDNA.js"></script>
+    <script src="spiritBrainPool.js"></script>
+    <script src="spiritBrainPretrained.js"></script>
+    <script src="environmentElement.js"></script>
+    <script src="environment.js"></script>
+    <script src="sceneParticle.js"></script>
+    <script src="sceneLabel.js"></script>
+    <script src="sceneRing.js"></script>
+    <script src="spiritEscape.js"></script>
+    <script src="fleeTarget.js"></script>
+    <script src="neuralSpirit.js"></script>
+    <script src="followerSpirit.js"></script>
+    <script src="seekVehicle.js"></script>
+    <script src="mission.js"></script>
+    <script src="powerUp.js"></script>
+    <script src="hideSpot.js"></script>
+    <script src="clapDetector.js"></script>
+    <script src="microphone.js"></script>
+    <script src="soundEffects.js"></script>
+    <script src="soundCall.js"></script>
+    <script src="wispMigration.js"></script>
+    <script src="gameState.js"></script>
+    <script src="startScreen.js"></script>
+    <script src="worldSetup.js"></script>
+    <script src="missionFlow.js"></script>
+    <script src="gameHud.js"></script>
+    <script src="sceneController.js"></script>
+    <script src="hearing.js"></script>
+    <script src="effects.js"></script>
+    <script src="input.js"></script>
+    <script src="debugView.js"></script>
+    <script src="sketch.js"></script>
+  </head>
+  <body data-environment="emerald">
+    <svg class="icon-sprite" aria-hidden="true" focusable="false">
+      <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.4-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></symbol>
+      <symbol id="i-gear" viewBox="0 0 24 24"><path d="M12 8.6a3.4 3.4 0 1 0 0 6.8 3.4 3.4 0 0 0 0-6.8zm8.3 4.6-1.9.4a6.6 6.6 0 0 1-.7 1.7l1.1 1.6a.9.9 0 0 1-.1 1.2l-1.2 1.2a.9.9 0 0 1-1.2.1l-1.6-1.1a6.6 6.6 0 0 1-1.7.7l-.4 1.9a.9.9 0 0 1-.9.7h-1.4a.9.9 0 0 1-.9-.7l-.4-1.9a6.6 6.6 0 0 1-1.7-.7l-1.6 1.1a.9.9 0 0 1-1.2-.1L3.9 18a.9.9 0 0 1-.1-1.2l1.1-1.6a6.6 6.6 0 0 1-.7-1.7l-1.9-.4a.9.9 0 0 1-.7-.9v-1.4c0-.4.3-.8.7-.9l1.9-.4c.2-.6.4-1.2.7-1.7L3.8 6.2A.9.9 0 0 1 3.9 5l1.2-1.2a.9.9 0 0 1 1.2-.1l1.6 1.1c.5-.3 1.1-.5 1.7-.7l.4-1.9c.1-.4.5-.7.9-.7h1.4c.4 0 .8.3.9.7l.4 1.9c.6.2 1.2.4 1.7.7l1.6-1.1a.9.9 0 0 1 1.2.1L20.1 5c.3.3.4.8.1 1.2L19.1 7.8c.3.5.5 1.1.7 1.7l1.9.4c.4.1.7.5.7.9v1.4c0 .4-.3.8-.7.9z"/></symbol>
+      <symbol id="i-door" viewBox="0 0 24 24"><path d="M5 3h9a1 1 0 0 1 1 1v3h-2V5H7v14h6v-2h2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm12.3 5.3 3.7 3.7-3.7 3.7-1.4-1.4 1.3-1.3H10v-2h7.2l-1.3-1.3z"/></symbol>
+      <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M20.5 3.5C11 3.5 4 8 4 15.5c0 1.6.4 3 1.1 4.2l-1.6 1.6 1.2 1.2 1.6-1.6c1.2.7 2.6 1.1 4.2 1.1C18 22 20.5 13 20.5 3.5zM9 17.5l-1.2-1.2C11 13 14 10 17.5 7.5 15 11 12.3 14.3 9 17.5z"/></symbol>
+      <symbol id="i-back" viewBox="0 0 24 24"><path d="M15.4 4.6 8 12l7.4 7.4-1.8 1.8L4.4 12l9.2-9.2z"/></symbol>
+    </svg>
+
+    <section id="start-screen" class="start-screen" data-step="title" aria-labelledby="start-title">
+      <div class="start-content title-step" id="title-step">
+        <div class="title-card paper taped">
+          <p class="kicker">UN DIORAMA DE PAPIER À SAUVER AVANT L’AUBE</p>
+          <h1 id="start-title" class="cut-title">La <em>Clairière</em></h1>
+          <p class="start-subtitle">Guide ta petite lumière, recueille les créatures égarées et échappe aux veilleurs qui rôdent.</p>
+          <nav class="title-menu" aria-label="Menu principal">
+            <button id="title-play" class="btn btn-primary" type="button"><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg> Jouer</button>
+            <button id="title-options" class="btn" type="button"><svg class="icon" aria-hidden="true"><use href="#i-gear"/></svg> Options</button>
+          </nav>
+        </div>
+      </div>
+      <div class="start-content select-step" id="select-step" hidden>
+        <div class="select-sheet paper taped">
+          <header class="select-header">
+            <button id="select-back" class="btn btn-round" type="button" aria-label="Retour au menu"><svg class="icon" aria-hidden="true"><use href="#i-back"/></svg></button>
+            <div>
+              <p class="kicker">ÉTAPE 1 · LE LIEU</p>
+              <h2 id="place-title" class="select-title">Choisis ton lieu d’aventure</h2>
+            </div>
+          </header>
+          <div class="select-body">
+            <div class="world-grid" id="world-grid">
+              <button class="world-card selected" type="button" data-world="emerald" aria-pressed="true"><span class="world-art" data-world-art="emerald" aria-hidden="true"></span><strong>Forêt de l'Émeraude</strong></button>
+              <button class="world-card" type="button" data-world="ice" aria-pressed="false"><span class="world-art" data-world-art="ice" aria-hidden="true"></span><strong>Montagne de Glace</strong></button>
+              <button class="world-card" type="button" data-world="gold" aria-pressed="false"><span class="world-art" data-world-art="gold" aria-hidden="true"></span><strong>Désert d'Or</strong></button>
+              <button class="world-card" type="button" data-world="volcano" aria-pressed="false"><span class="world-art" data-world-art="volcano" aria-hidden="true"></span><strong>Île Volcanique</strong></button>
+              <button class="world-card" type="button" data-world="sky" aria-pressed="false"><span class="world-art" data-world-art="sky" aria-hidden="true"></span><strong>Cité des Nuages</strong></button>
+              <button class="world-card" type="button" data-world="ocean" aria-pressed="false"><span class="world-art" data-world-art="ocean" aria-hidden="true"></span><strong>Océan Profond</strong></button>
+            </div>
+            <aside class="avatar-section" aria-labelledby="avatar-title">
+              <p class="kicker">ÉTAPE 2</p>
+              <h3 id="avatar-title">Ta petite lumière</h3>
+              <div class="avatar-grid" id="avatar-grid">
+                <button class="avatar-option selected" type="button" data-avatar="firefly" aria-label="Luciole" title="Luciole" aria-pressed="true"><span data-avatar-art="firefly"></span></button>
+                <button class="avatar-option" type="button" data-avatar="butterfly" aria-label="Papillon" title="Papillon" aria-pressed="false"><span data-avatar-art="butterfly"></span></button>
+                <button class="avatar-option" type="button" data-avatar="star" aria-label="Étoile" title="Étoile" aria-pressed="false"><span data-avatar-art="star"></span></button>
+                <button class="avatar-option" type="button" data-avatar="moon" aria-label="Lune" title="Lune" aria-pressed="false"><span data-avatar-art="moon"></span></button>
+                <button class="avatar-option" type="button" data-avatar="crystal" aria-label="Cristal" title="Cristal" aria-pressed="false"><span data-avatar-art="crystal"></span></button>
+                <button class="avatar-option" type="button" data-avatar="leaf" aria-label="Feuille" title="Feuille" aria-pressed="false"><span data-avatar-art="leaf"></span></button>
+              </div>
+              <button id="start-adventure" class="btn btn-primary start-adventure" type="button"><span>Commencer</span></button>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="celebration-overlay" class="celebration-overlay" hidden aria-live="assertive">
+      <div class="celebration-confetti" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <p class="kicker">UN NOUVEAU CHAPITRE SE DÉPLIE</p>
+      <h2 id="celebration-title" class="cut-title">Niveau débloqué !</h2>
+      <p id="celebration-message">La magie grandit grâce à toi.</p>
+    </section>
+
+    <header id="game-hud" aria-label="État de la partie">
+      <div class="game-brand paper">
+        <span class="brand-mark" aria-hidden="true"><svg class="icon"><use href="#i-leaf"/></svg></span>
+        <div>
+          <p class="kicker">DIORAMA DE PAPIER</p>
+          <h1>La Clairière</h1>
+        </div>
+      </div>
+      <div class="game-stats paper" aria-live="polite">
+        <div class="stat-card score-card"><span>Sauvetages</span><strong id="score-value">0</strong></div>
+        <div class="stat-card reward-card"><span>Éclats</span><strong id="reward-value">0</strong></div>
+        <div class="stat-card"><span>Énergie</span><strong id="lives-value">♥ ♥ ♥</strong></div>
+        <div class="stat-card timer-card"><span>Avant l’aube</span><strong id="timer-value">03:00</strong></div>
+        <button id="sanctuary-trigger" class="stat-card sanctuary-card" type="button" title="Sauve 3 esprits pour gagner une graine de refuge.">
+          <span>Refuge <kbd>E</kbd></span>
+          <strong id="sanctuary-count">0 / 2</strong>
+          <small id="sanctuary-progress">3 esprits = 1 graine</small>
+        </button>
+      </div>
+      <div class="hud-actions">
+        <button id="pause-toggle" class="btn btn-small" type="button" aria-label="Mettre le jeu en pause">Pause</button>
+        <button id="game-replay" class="btn btn-small" type="button">Rejouer</button>
+        <button id="tutorial-help" class="btn btn-small" type="button" aria-label="Relancer le tutoriel">Aide</button>
+        <button id="call-trigger" class="btn btn-small" type="button" aria-label="Appeler les esprits (touche C)">Appel</button>
+        <button id="settings-toggle" class="btn btn-small btn-primary" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="settings-panel">
+          <svg class="icon" aria-hidden="true"><use href="#i-gear"/></svg> Réglages
+        </button>
+      </div>
+    </header>
+
+    <section id="mission-panel" class="paper taped" aria-label="Progression de la mission">
+      <div class="mission-heading"><span>NIVEAU <b id="level-number">1</b> · AVANT L’AUBE</span><strong id="mission-count">0 / 10</strong></div>
+      <div class="mission-track" role="progressbar" aria-label="Créatures sauvées" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0"><span id="mission-fill"></span></div>
+      <small id="mission-description">Sauve 10 abeilles avant l’aube.</small>
+      <small id="migration-status" class="migration-status" aria-live="off"></small>
+    </section>
+
+    <aside id="level-up-card" class="paper" hidden role="status" aria-live="polite">
+      <span class="kicker">NOUVEAU CHAPITRE</span>
+      <strong id="level-up-title">Niveau 2</strong>
+      <small id="level-up-message">Nouvelle mission : sauve 15 créatures.</small>
+    </aside>
+
+    <aside id="tutorial-card" class="paper taped" hidden aria-live="polite" aria-atomic="true">
+      <p class="kicker">APPRENDRE EN JOUANT</p>
+      <h2 id="tutorial-title">La luciole a besoin de toi</h2>
+      <p id="tutorial-message"></p>
+      <div class="tutorial-actions">
+        <button id="tutorial-next" class="btn btn-small" type="button">Passer l’étape</button>
+        <button id="tutorial-finish" class="btn btn-small btn-quiet" type="button">Terminer le guide</button>
+      </div>
+    </aside>
+
+    <section id="end-card" class="paper taped" hidden aria-live="assertive" aria-labelledby="end-title">
+      <p class="kicker">LA CLAIRIÈRE SE SOUVIENT DE TOI</p>
+      <h2 id="end-title" class="cut-title">Le monde renaît</h2>
+      <p id="end-message"></p>
+      <button id="end-replay" class="btn btn-primary" type="button">Rejouer</button>
+    </section>
+
+    <aside id="pause-overlay" class="paper taped" hidden role="dialog" aria-modal="true" aria-labelledby="pause-title">
+      <p class="kicker">LE TEMPS RETIENT SON SOUFFLE</p>
+      <h2 id="pause-title" class="cut-title">Pause</h2>
+      <p>Le diorama t’attend. Reprends quand tu es prêt.</p>
+      <div class="pause-actions">
+        <button id="pause-resume" class="btn btn-primary" type="button">Reprendre</button>
+        <button id="pause-restart" class="btn" type="button">Recommencer le niveau</button>
+      </div>
+    </aside>
+
+    <main id="scene" aria-label="Aventure : guide ta créature, sauve les créatures lumineuses et évite les veilleurs">
+    </main>
+    <div id="game-hint" class="paper" aria-hidden="true">FLÈCHES OU SOURIS <span>✦</span> P : PAUSE <span>✦</span> C : APPEL <span>✦</span> TOUCHE LES CRÉATURES <span>✦</span> RAMASSE LES JETONS <span>✦</span> CACHE-TOI <span>✦</span> ÉVITE LES VEILLEURS</div>
+
+    <dialog id="settings-panel" class="paper" aria-labelledby="settings-title">
+      <div class="settings-heading">
+        <div>
+          <p class="kicker">ÉQUILIBRE DU DIORAMA</p>
+          <h2 id="settings-title">Réglages</h2>
+        </div>
+        <button id="settings-close" class="btn btn-round" type="button" aria-label="Fermer les réglages">×</button>
+      </div>
+      <div class="settings-controls">
+        <div class="tone-control environment-control">
+          <label for="environment-select">Changer de lieu</label>
+          <select id="environment-select">
+            <option value="emerald">Forêt de l'Émeraude</option>
+            <option value="ice">Montagne de Glace</option>
+            <option value="gold">Désert d'Or</option>
+            <option value="volcano">Île Volcanique</option>
+            <option value="sky">Cité des Nuages</option>
+            <option value="ocean">Océan Profond</option>
+          </select>
+        </div>
+        <div class="control-group population-control">
+          <label for="vehicle-count">Nombre de veilleurs</label>
+          <input id="vehicle-count" type="range" min="1" max="200" step="1" value="4">
+          <output id="vehicle-count-value" for="vehicle-count">4 / 200</output>
+        </div>
+        <div class="control-group target-population-control">
+          <label for="target-count">Esprits dans le diorama</label>
+          <input id="target-count" type="range" min="1" max="50" step="1" value="5">
+          <output id="target-count-value" for="target-count">5 / 50</output>
+        </div>
+        <div class="control-group">
+          <label for="target-speed">Vitesse des esprits sauvages</label>
+          <input id="target-speed" type="range" min="0" max="4" step="0.1" value="1.4">
+          <output id="target-speed-value" for="target-speed">1,4</output>
+        </div>
+        <div class="control-group">
+          <label for="cursor-speed">Vitesse de ta créature</label>
+          <input id="cursor-speed" type="range" min="0" max="8" step="0.1" value="3.5">
+          <output id="cursor-speed-value" for="cursor-speed">3,5</output>
+        </div>
+        <label class="switch-control" for="evolution-enabled">
+          <input id="evolution-enabled" type="checkbox" checked>
+          <span class="switch" aria-hidden="true"></span>
+          <span>Évolution génétique des esprits</span>
+        </label>
+        <label class="switch-control" for="migration-enabled">
+          <input id="migration-enabled" type="checkbox" checked>
+          <span class="switch" aria-hidden="true"></span>
+          <span>Feux follets migrateurs (algorithme génétique)</span>
+        </label>
+        <label class="switch-control" for="neural-spirits-enabled">
+          <input id="neural-spirits-enabled" type="checkbox" checked>
+          <span class="switch" aria-hidden="true"></span>
+          <span>Esprits à réseau de neurones (fuite intelligente)</span>
+        </label>
+        <small id="neural-spirits-status" class="neural-status" aria-live="off"></small>
+        <label class="switch-control" for="mic-enabled">
+          <input id="mic-enabled" type="checkbox">
+          <span class="switch" aria-hidden="true"></span>
+          <span>Contrôle au micro (clap = appel, double clap = refuge)</span>
+        </label>
+        <small id="mic-status" class="neural-status" aria-live="polite">Touche C : appeler les esprits (les veilleurs entendent aussi).</small>
+        <label class="switch-control" for="steering-debug-enabled">
+          <input id="steering-debug-enabled" type="checkbox">
+          <span class="switch" aria-hidden="true"></span>
+          <span>Visualiser les vecteurs de pilotage</span>
+        </label>
+        <label class="switch-control" for="sound-enabled">
+          <input id="sound-enabled" type="checkbox">
+          <span class="switch" aria-hidden="true"></span>
+          <span>Ambiance sonore</span>
+        </label>
+        <div class="control-group sound-volume">
+          <label for="sound-volume">Volume</label>
+          <input id="sound-volume" type="range" min="0" max="100" step="1" value="25">
+          <output id="sound-volume-value" for="sound-volume">25 %</output>
+        </div>
+        <div class="tone-control">
+          <label for="sound-tone">Tonalité</label>
+          <select id="sound-tone">
+            <option value="sine">Souffle doux</option>
+            <option value="triangle">Goutte ronde</option>
+            <option value="sawtooth">Chant brillant</option>
+            <option value="square">Bois creux</option>
+          </select>
+        </div>
+      </div>
+      <p class="settings-note">Chaque lieu change le relief, les décors, les créatures et les routes de patrouille. Les veilleurs poursuivent les esprits les plus proches et contournent les obstacles. Le mode debug affiche les rayons de perception, les vitesses, les marges d’obstacles et la route de patrouille.</p>
+    </dialog>
+  </body>
+</html>
