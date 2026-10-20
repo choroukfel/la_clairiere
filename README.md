@@ -22,28 +22,8 @@ Les esprits sauvages errent en groupe et fuient les veilleurs. Après deux secon
 | Vecteurs de pilotage | réglages : *Visualiser les vecteurs de pilotage* |
 | Téléphone | toucher ou glisser le doigt place le but ; boutons **Appel**, **Refuge**, **Pause** ; interface compacte en portrait et en paysage |
 
-## Tous les points du cours, et où les voir
 
-| Exemple du cours | Dans le jeu | Fichiers |
-|---|---|---|
-| **1 · Seek / Flee** | les veilleurs patrouillent et foncent ; la fuite de Reynolds (vitesse désirée opposée à la menace) | `steeringBehaviors.js` (`seek`, `flee`) |
-| **1 · Fuite avec endurance** (scénario) | rayon de déclenchement ≠ distance de sécurité, sprint, endurance, épuisement, réarmement seulement en sécurité ; barre d’endurance sous l’esprit | `spiritEscape.js`, `fleeTarget.js` |
-| **2 · Pursue / Evade** | les veilleurs anticipent leur cible ; les esprits évitent la position future du veilleur | `steeringBehaviors.js` (`pursue`, `evade`) |
-| **2 · Poursuite parfaite** (correction) | le lynx et la baudroie visent le **point d’interception exact** (résolution de \|D + V t\| = s t) | `steeringBehaviors.js` (`interceptPoint`, `pursuePerfect`), `seekVehicle.js` |
-| **3 · Arrive** | la luciole ralentit sur le curseur ; un esprit appelé arrive vers elle | `steeringBehaviors.js` (`arrive`) |
-| **3 · Arrive avec décalage** (correction) | le **cortège** : les esprits sauvés suivent la luciole en file, chacun à distance fixe du précédent | `followerSpirit.js` |
-| **4 · Wander** | errance des esprits, des veilleurs sans cible et du décor animé | `steeringBehaviors.js` (`wander`) |
-| **5-1 · Projection scalaire** | évitement d’obstacle, suivi de route, et **ligne de vue** (un obstacle cache-t-il la cible ?) | `steeringBehaviors.js` (`projectOnSegment`, `lineOfSight`) |
-| **5-2 / 5-3 · Path following** | chaque veilleur suit la route de patrouille de son décor | `steeringBehaviors.js` (`followPath`), `seekVehicle.js` |
-| **6 · Obstacle avoidance** | tous les agents contournent rochers, arbres et cristaux | `steeringBehaviors.js` (`avoidObstacle`) |
-| **7 · Boids** | les esprits errent en groupe : séparation, alignement, cohésion | `steeringBehaviors.js` (`separate`, `align`, `cohesion`) |
-| **8 · Évolution des comportements** | les poids de fuite, de séparation, de cohésion et la perception sont des gènes ; sélection périodique | `evolution.js` (`SteeringDNA`, `EvolutionManager`) |
-| **9 / 9b · Réseau de neurones + capteurs à rayons** | chaque esprit neuronal porte trois capteurs à rayons (devant, 45° à gauche et à droite) qui mesurent le premier obstacle ou veilleur ; avec ses autres perceptions, ils nourrissent un réseau de neurones dont les poids évoluent | `sensorRay.js`, `neuralSpirit.js`, `neuralSteeringDNA.js` |
-| **10 · Missiles génétiques** | les **feux follets migrateurs** : 18 feux follets à ADN de trajectoire (une force par image) traversent la carte jusqu’au nid ; à chaque vol, les meilleurs sont sélectionnés, croisés et mutés, et on les voit apprendre à contourner obstacles et veilleurs | `migratingWisp.js` (sous-classe de `GeneticRocket`), `wispNest.js`, `wispMigration.js`, `evolution.js` (`TrajectoryDNA`, `GeneticPopulation`) |
-| **Reynolds : hide** | un esprit en fuite peut se cacher derrière un obstacle, du côté opposé au veilleur | `steeringBehaviors.js` (`hidingSpot`, `hide`) |
-| **Reynolds : leader following / offset pursuit** | le cortège vise un point derrière la position **future** de son meneur, et laisse libre la route devant lui | `followerSpirit.js` |
-
-## Nouveautés de cette version
+## cette version
 
 - **Fuite réglementée** : un esprit fuit quand un veilleur entre dans son rayon de perception et continue jusqu’à la distance de sécurité (rayon + 70 px), même hors du cercle. Une endurance pleine dure 3,5 s ; à l’épuisement, ses limites normales sont restaurées exactement, il devient vulnérable (« zZ ») et ne peut refuir qu’une fois en sécurité. L’endurance se recharge au calme. Changer de lieu ou de niveau remet la fuite à zéro sans recréer la population.
 - **Perception par ligne de vue** : un veilleur ne voit plus une cible cachée derrière un obstacle ; il va enquêter à sa dernière position connue.
